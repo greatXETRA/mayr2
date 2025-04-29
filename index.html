@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mayr Technologie - Formgedächtnislegierungen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mayr-blue': '#0093d7',
+                        'mayr-green': '#a1bf36',
+                        'gray-100': '#f8f9fa',
+                        'gray-200': '#e9ecef',
+                        'gray-300': '#dee2e6',
+                        'gray-400': '#ced4da',
+                        'gray-500': '#adb5bd',
+                        'gray-600': '#6c757d',
+                        'gray-700': '#495057',
+                        'gray-800': '#343a40',
+                        'gray-900': '#212529',
+                    },
+                    fontFamily: {
+                        'helvetica': ['Helvetica Now Display', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Now+Display:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Helvetica Now Display', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .h1 {
+            font-size: 32px;
+            line-height: 1.2;
+        }
+        
+        .body-text {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .language-selector:hover .language-menu {
+            display: block;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .configurator-step {
+            display: none;
+        }
+        
+        .configurator-step.active {
+            display: block;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.show {
+            max-height: 1000px;
+        }
+        
+        .cookie-banner {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        /* Ensure contrast ratios meet WCAG standards */
+        .text-mayr-blue {
+            color: #0093d7;
+        }
+        
+        .bg-mayr-blue {
+            background-color: #0093d7;
+        }
+        
+        .text-mayr-green {
+            color: #a1bf36;
+        }
+        
+        .bg-mayr-green {
+            background-color: #a1bf36;
+        }
+        
+        /* Focus styles for accessibility */
+        *:focus {
+            outline: 2px solid #0093d7;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 hidden z-50">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-4 md:mb-0 md:mr-4">
+                <p class="body-text">Wir verwenden Cookies, um Ihnen das beste Nutzererlebnis bieten zu können. Durch die weitere Nutzung der Website stimmen Sie der Verwendung von Cookies zu.</p>
+            </div>
+            <div class="flex space-x-4">
+                <button id="acceptCookies" class="bg-mayr-blue hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-300">Akzeptieren</button>
+                <button id="rejectCookies" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition duration-300">Ablehnen</button>
+                <a href="/datenschutz" class="text-mayr-blue hover:underline">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <!-- Top Bar -->
+            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-700 hover:text-mayr-blue transition duration-300">
+                        <i class="fas fa-phone-alt"></i> +49 123 456789
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-mayr-blue transition duration-300">
+                        <i class="fas fa-envelope"></i> info@mayr-technologie.de
+                    </a>
+                </div>
+                <div class="language-selector relative">
+                    <button class="flex items-center text-gray-700 hover:text-mayr-blue transition duration-300">
+                        <i class="fas fa-globe mr-2"></i> DE
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="language-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">English</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Español</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Italiano</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Français</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">日本語</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Português</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">中文</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Türkçe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Navigation -->
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <img src="https://via.placeholder.com/150x50?text=mayr+Logo" alt="mayr Technologie Logo" class="h-10">
+                    </a>
+                </div>
+                
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="dropdown relative">
+                        <button class="flex items-center text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">
+                            Produkte <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">FGL</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Powerbündel</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Spannsystem</a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown relative">
+                        <button class="flex items-center text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">
+                            Fachwissen <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">FAQs</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Glossar</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Technische Dokumente</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">Konfigurator</a>
+                    <a href="#" class="text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">Kontakt</a>
+                </div>
+                
+                <div class="flex items-center lg:hidden">
+                    <button id="mobileMenuButton" class="text-gray-700 hover:text-mayr-blue transition duration-300">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </nav>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="lg:hidden hidden bg-white absolute left-0 right-0 shadow-lg z-40">
+                <div class="container mx-auto px-4 py-2">
+                    <div class="flex flex-col space-y-2">
+                        <div class="dropdown relative">
+                            <button class="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">
+                                Produkte <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="dropdown-menu pl-4 hidden">
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">FGL</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Powerbündel</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Spannsystem</a>
+                            </div>
+                        </div>
+                        
+                        <div class="dropdown relative">
+                            <button class="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">
+                                Fachwissen <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="dropdown-menu pl-4 hidden">
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">FAQs</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Glossar</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Technische Dokumente</a>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="px-4 py-2 text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">Konfigurator</a>
+                        <a href="#" class="px-4 py-2 text-gray-700 hover:text-mayr-blue transition duration-300 font-medium">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-mayr-blue to-mayr-green text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="h1 font-bold mb-4">Innovative Formgedächtnislegierungen für Ihre Anwendung</h1>
+                    <p class="body-text mb-6">Entdecken Sie die Zukunft der Antriebstechnik mit unseren intelligenten Materiallösungen.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="bg-white text-mayr-blue hover:bg-gray-100 font-medium px-6 py-3 rounded transition duration-300 text-center">Konfigurator starten</a>
+                        <a href="#" class="bg-transparent border-2 border-white hover:bg-white hover:text-mayr-blue font-medium px-6 py-3 rounded transition duration-300 text-center">Mehr erfahren</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://via.placeholder.com/600x400?text=FGL+Animation" alt="Formgedächtnislegierung in Aktion" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-gray-200 py-2">
+        <div class="container mx-auto px-4">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li>
+                        <a href="#" class="text-gray-600 hover:text-mayr-blue transition duration-300">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <span class="text-gray-500">/</span>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-600 hover:text-mayr-blue transition duration-300">Produkte</a>
+                    </li>
+                    <li>
+                        <span class="text-gray-500">/</span>
+                    </li>
+                    <li aria-current="page">
+                        <span class="text-mayr-blue font-medium">Formgedächtnislegierungen</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Product Navigation Tabs -->
+        <div class="mb-8 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px" id="productTabs" role="tablist">
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 border-transparent hover:text-mayr-blue hover:border-gray-300 transition duration-300 active" id="fgl-tab" data-tab-target="#fgl">Formgedächtnislegierungen</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 border-transparent hover:text-mayr-blue hover:border-gray-300 transition duration-300" id="power-tab" data-tab-target="#power">Powerbündel</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 border-transparent hover:text-mayr-blue hover:border-gray-300 transition duration-300" id="clamping-tab" data-tab-target="#clamping">Spannsystem</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tabContent">
+            <!-- FGL Tab -->
+            <div class="tab-content active" id="fgl" role="tabpanel" aria-labelledby="fgl-tab">
+                <section class="mb-12">
+                    <h2 class="h1 font-bold mb-6 text-mayr-blue">Formgedächtnislegierungen (FGL)</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="body-text mb-4">Formgedächtnislegierungen (FGL) sind intelligente Materialien, die nach einer Verformung durch Temperaturänderung ihre ursprüngliche Gestalt wieder annehmen können. Diese einzigartige Eigenschaft macht sie ideal für zahlreiche industrielle Anwendungen.</p>
+                            <p class="body-text mb-4">Unsere FGL-Produkte zeichnen sich durch hohe Zuverlässigkeit, lange Lebensdauer und präzise Bewegungsabläufe aus. Sie sind die perfekte Lösung, wenn es um kompakte, leichte und wartungsarme Antriebssysteme geht.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <h3 class="font-bold mb-2 text-mayr-green">Legierungsbeschreibung</h3>
+                                <p class="body-text">Unsere Nickel-Titan-Legierungen (NiTi) kombinieren hervorragende Formgedächtniseigenschaften mit ausgezeichneter Korrosionsbeständigkeit. Durch präzise Zusammensetzung und Wärmebehandlung erreichen wir optimale Umwandlungstemperaturen für Ihre spezifische Anwendung.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://via.placeholder.com/600x400?text=FGL+Diagramm" alt="Funktionsweise von FGL" class="rounded-lg shadow-md w-full">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Effekttypen</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Einwegeffekt</h4>
+                            <img src="https://via.placeholder.com/400x250?text=Einwegeffekt" alt="Einwegeffekt" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">Beim Einwegeffekt "erinnert" sich das Material nur an eine Form. Nach Verformung bei niedriger Temperatur kehrt es bei Erwärmung in seine Ausgangsform zurück, kühlt aber in der verformten Gestalt ab.</p>
+                            <div class="bg-gray-100 p-3 rounded-lg">
+                                <h5 class="font-bold mb-1">Anwendungsbeispiele:</h5>
+                                <ul class="list-disc pl-5 body-text">
+                                    <li class="mb-1">Thermostatventile für präzise Temperaturregelung</li>
+                                    <li>Automatische Fensteröffner in Gewächshäusern</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Zweiwegeffekt</h4>
+                            <img src="https://via.placeholder.com/400x250?text=Zweiwegeffekt" alt="Zweiwegeffekt" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">Beim Zweiwegeffekt wechselt das Material zwischen zwei stabilen Formen - einer bei niedriger und einer bei hoher Temperatur. Dieser Effekt ermöglicht zyklische Bewegungen ohne externe Krafteinwirkung.</p>
+                            <div class="bg-gray-100 p-3 rounded-lg">
+                                <h5 class="font-bold mb-1">Anwendungsbeispiele:</h5>
+                                <ul class="list-disc pl-5 body-text">
+                                    <li class="mb-1">Mikroaktoren in der Medizintechnik</li>
+                                    <li>Adaptive Greifsysteme in der Robotik</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Konfigurator</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="mb-6">
+                            <div class="flex space-x-2 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-mayr-blue text-white flex items-center justify-center font-bold">1</div>
+                                <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">2</div>
+                                <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">3</div>
+                                <div class="w-8 h-8 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">4</div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-mayr-blue h-2.5 rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+
+                        <div class="configurator-steps">
+                            <div class="configurator-step active" id="step1">
+                                <h4 class="text-xl font-bold mb-4">Maximalkraft</h4>
+                                <p class="body-text mb-6">Wählen Sie die benötigte Kraft für Ihre Anwendung:</p>
+                                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                                    <button class="config-option bg-gray-100 hover:bg-mayr-blue hover:text-white p-4 rounded-lg transition duration-300" data-value="5N">
+                                        <h5 class="font-bold mb-1">5 N</h5>
+                                        <p class="text-sm">Leichte Anwendungen</p>
+                                    </button>
+                                    <button class="config-option bg-gray-100 hover:bg-mayr-blue hover:text-white p-4 rounded-lg transition duration-300" data-value="20N">
+                                        <h5 class="font-bold mb-1">20 N</h5>
+                                        <p class="text-sm">Mittlere Anwendungen</p>
+                                    </button>
+                                    <button class="config-option bg-gray-100 hover:bg-mayr-blue hover:text-white p-4 rounded-lg transition duration-300" data-value="50N">
+                                        <h5 class="font-bold mb-1">50 N</h5>
+                                        <p class="text-sm">Schwere Anwendungen</p>
+                                    </button>
+                                </div>
+                                <div class="flex justify-between">
+                                    <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-6 py-2 rounded transition duration-300" disabled>Zurück</button>
+                                    <button class="next-step bg-mayr-blue hover:bg-blue-700 text-white font-medium px-6 py-2 rounded transition duration-300">Weiter</button>
+                                </div>
+                            </div>
+
+                            <div class="configurator-step" id="step2">
+                                <h4 class="text-xl font-bold mb-4">Grundlänge</h4>
+                                <p class="body-text mb-6">Geben Sie die benötigte Länge des FGL-Drahtes an (in mm):</p>
+                                <div class="mb-6">
+                                    <input type="range" min="10" max="200" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" id="lengthSlider">
+                                    <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                        <span>10 mm</span>
+                                        <span id="lengthValue">50 mm</span>
+                                        <span>200 mm</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between">
+                                    <button class="prev-step bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-6 py-2 rounded transition duration-300">Zurück</button>
+                                    <button class="next-step bg-mayr-blue hover:bg-blue-700 text-white font-medium px-6 py-2 rounded transition duration-300">Weiter</button>
+                                </div>
+                            </div>
+
+                            <div class="configurator-step" id="step3">
+                                <h4 class="text-xl font-bold mb-4">Anschluss</h4>
+                                <p class="body-text mb-6">Wählen Sie den gewünschten Anschlusstyp:</p>
+                                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                                    <button class="config-option bg-gray-100 hover:bg-mayr-blue hover:text-white p-4 rounded-lg transition duration-300" data-value="crimp">
+                                        <h5 class="font-bold mb-1">Crimp-Verbindung</h5>
+                                        <p class="text-sm">Einfache, kostengünstige Lösung</p>
+                                    </button>
+                                    <button class="config-option bg-gray-100 hover:bg-mayr-blue hover:text-white p-4 rounded-lg transition duration-300" data-value="solder">
+                                        <h5 class="font-bold mb-1">Lötanschluss</h5>
+                                        <p class="text-sm">Höhere Zuverlässigkeit</p>
+                                    </button>
+                                </div>
+                                <div class="flex justify-between">
+                                    <button class="prev-step bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-6 py-2 rounded transition duration-300">Zurück</button>
+                                    <button class="next-step bg-mayr-blue hover:bg-blue-700 text-white font-medium px-6 py-2 rounded transition duration-300">Weiter</button>
+                                </div>
+                            </div>
+
+                            <div class="configurator-step" id="step4">
+                                <h4 class="text-xl font-bold mb-4">Einbau</h4>
+                                <p class="body-text mb-6">Beschreiben Sie Ihre Anwendung:</p>
+                                <div class="mb-6">
+                                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mayr-blue focus:border-transparent" rows="4" placeholder="Bitte beschreiben Sie, wie das FGL-Element eingebaut werden soll und welche Anforderungen es erfüllen muss..."></textarea>
+                                </div>
+                                <div class="flex justify-between">
+                                    <button class="prev-step bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-6 py-2 rounded transition duration-300">Zurück</button>
+                                    <button class="bg-mayr-green hover:bg-green-600 text-white font-medium px-6 py-2 rounded transition duration-300">Konfiguration abschließen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Powerbündel Tab -->
+            <div class="tab-content" id="power" role="tabpanel" aria-labelledby="power-tab">
+                <section class="mb-12">
+                    <h2 class="h1 font-bold mb-6 text-mayr-blue">Powerbündel</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="body-text mb-4">Unsere Powerbündel kombinieren mehrere FGL-Drähte zu einem leistungsstarken Aktor, der höhere Kräfte und größere Verformungen ermöglicht. Durch die parallele Anordnung der Drähte erreichen wir eine homogene Kraftverteilung und erhöhte Lebensdauer.</p>
+                            <p class="body-text mb-4">Die modulare Bauweise ermöglicht eine individuelle Anpassung an Ihre spezifischen Anforderungen. Wählen Sie zwischen verschiedenen Drahtdurchmessern, Anzahlen und Anschlussvarianten für optimale Ergebnisse.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <h3 class="font-bold mb-2 text-mayr-green">Funktionsweise</h3>
+                                <p class="body-text">Ein Powerbündel besteht aus mehreren parallel angeordneten FGL-Drähten, die gemeinsam an einem zentralen Aktor befestigt sind. Bei Erwärmung kontrahieren alle Drähte synchron und erzeugen so eine deutlich höhere Gesamtkraft als ein einzelner Draht. Durch spezielle Fügetechniken und Anschlusskomponenten gewährleisten wir eine gleichmäßige Kraftverteilung und lange Lebensdauer.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://via.placeholder.com/600x400?text=Powerbündel+Diagramm" alt="Aufbau eines Powerbündels" class="rounded-lg shadow-md w-full">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Vorteile</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                            <div class="bg-mayr-blue text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bolt text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Höhere Kräfte</h4>
+                            <p class="body-text">Durch die Kombination mehrerer Drähte erreichen Sie bis zu 10-fach höhere Kräfte im Vergleich zu Einzeldrähten.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                            <div class="bg-mayr-blue text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cogs text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Anpassbar</h4>
+                            <p class="body-text">Wählen Sie aus verschiedenen Drahtanzahlen und -durchmessern für maßgeschneiderte Lösungen.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                            <div class="bg-mayr-blue text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Zuverlässig</h4>
+                            <p class="body-text">Redundantes System: Bei Ausfall eines Drahtes übernehmen die anderen die Last.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Anwendungsmöglichkeiten</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Greifsysteme</h4>
+                            <img src="https://via.placeholder.com/600x300?text=Greifsystem" alt="Greifsystem mit Powerbündel" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">Powerbündel eignen sich ideal für adaptive Greifsysteme in der Robotik und Automatisierungstechnik. Durch die hohen Kräfte können auch schwerere oder sperrige Teile sicher gegriffen und positioniert werden.</p>
+                            <ul class="list-disc pl-5 body-text">
+                                <li class="mb-1">Montageautomation</li>
+                                <li class="mb-1">Handhabungstechnik</li>
+                                <li>Lebensmittelverarbeitung</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Spannsysteme</h4>
+                            <img src="https://via.placeholder.com/600x300?text=Spannsystem" alt="Spannsystem mit Powerbündel" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">In Spannsystemen ermöglichen Powerbündel eine präzise und wiederholgenaue Positionierung von Werkstücken. Die temperaturgesteuerte Aktivierung erlaubt eine berührungslose Steuerung in sensiblen Umgebungen.</p>
+                            <ul class="list-disc pl-5 body-text">
+                                <li class="mb-1">Werkzeugmaschinen</li>
+                                <li class="mb-1">Prüf- und Messvorrichtungen</li>
+                                <li>Medizintechnik</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Spannsystem Tab -->
+            <div class="tab-content" id="clamping" role="tabpanel" aria-labelledby="clamping-tab">
+                <section class="mb-12">
+                    <h2 class="h1 font-bold mb-6 text-mayr-blue">Spannsystem</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="body-text mb-4">Unser innovatives Spannsystem nutzt die einzigartigen Eigenschaften von Formgedächtnislegierungen für präzise und zuverlässige Spannvorgänge. Die berührungslose Aktivierung durch Temperaturänderung macht das System ideal für anspruchsvolle industrielle Umgebungen.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                <h3 class="font-bold mb-2 text-mayr-green">Funktionsweise</h3>
+                                <p class="body-text">Das Spannsystem besteht aus speziell geformten FGL-Elementen, die bei Erwärmung ihre vordefinierte Form annehmen. Durch diesen Formwechsel erzeugen sie die benötigte Spannkraft. Die Aktivierung erfolgt kontaktlos durch integrierte Heizelemente oder Umgebungswärme. Nach Abkühlung bleibt die Spannkraft erhalten, bis eine erneute Erwärmung die Entspannung auslöst.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://via.placeholder.com/600x400?text=Spannsystem+Animation" alt="Funktionsweise des Spannsystems" class="rounded-lg shadow-md w-full">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Vorteile</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Präzision</h4>
+                                <p class="body-text text-sm">Wiederholgenauigkeit bis zu 1 µm</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Wartungsfrei</h4>
+                                <p class="body-text text-sm">Keine beweglichen Teile, lange Lebensdauer</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Kompakt</h4>
+                                <p class="body-text text-sm">Minimale Bauraumanforderungen</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Sauber</h4>
+                                <p class="body-text text-sm">Keine Schmiermittel erforderlich</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Energieeffizient</h4>
+                                <p class="body-text text-sm">Strom nur während des Umschaltens</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">EMV-neutral</h4>
+                                <p class="body-text text-sm">Keine elektromagnetischen Störungen</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-mayr-blue">Anwendungsbereiche</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Werkzeugmaschinen</h4>
+                            <img src="https://via.placeholder.com/600x300?text=Werkzeugmaschine" alt="Spannsystem in Werkzeugmaschine" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">In CNC-Maschinen und Bearbeitungszentren ermöglicht unser Spannsystem eine schnelle und präzise Werkstückaufspannung. Die berührungslose Aktivierung reduziert Stillstandszeiten und erhöht die Prozesssicherheit.</p>
+                            <ul class="list-disc pl-5 body-text">
+                                <li class="mb-1">Fräsmaschinen</li>
+                                <li class="mb-1">Drehmaschinen</li>
+                                <li>Schleifmaschinen</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold mb-3 text-mayr-green">Prüftechnik</h4>
+                            <img src="https://via.placeholder.com/600x300?text=Prüftechnik" alt="Spannsystem in Prüftechnik" class="mb-4 rounded-lg w-full">
+                            <p class="body-text mb-4">Für Mess- und Prüfanwendungen bietet das Spannsystem eine vibrationsarme und verformungsfreie Aufspannung. Die reproduzierbare Spannkraft gewährleistet vergleichbare Messergebnisse über lange Zeiträume.</p>
+                            <ul class="list-disc pl-5 body-text">
+                                <li class="mb-1">Koordinatenmessgeräte</li>
+                                <li class="mb-1">Oberflächenmessung</li>
+                                <li>Materialprüfung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="mb-12">
+            <h2 class="h1 font-bold mb-6 text-mayr-blue">Häufige Fragen (FAQ)</h2>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="accordion-item border-b border-gray-200">
+                    <button class="accordion-button w-full text-left p-4 hover:bg-gray-50 transition duration-300 flex justify-between items-center">
+                        <span class="font-bold">Wie lange ist die Lebensdauer von FGL-Aktoren?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 body-text">
+                            <p>Die Lebensdauer unserer FGL-Aktoren hängt stark von den Einsatzbedingungen ab. Unter optimalen Bedingungen (korrekte Vorspannung, Temperaturbereich, Zyklusdauer) erreichen unsere Standardprodukte typischerweise 1-10 Millionen Zyklen. Für spezielle Anwendungen bieten wir auch Hochleistungsvarianten mit bis zu 100 Millionen Zyklen an.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item border-b border-gray-200">
+                    <button class="accordion-button w-full text-left p-4 hover:bg-gray-50 transition duration-300 flex justify-between items-center">
+                        <span class="font-bold">Welche Temperaturbereiche sind möglich?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 body-text">
+                            <p>Standardmäßig bieten wir FGL-Aktoren mit Umwandlungstemperaturen zwischen -30°C und +120°C an. Durch spezielle Legierungszusammensetzungen sind auch höhere Temperaturen bis zu 150°C möglich. Die genaue Auswahl hängt von Ihrer spezifischen Anwendung ab.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item border-b border-gray-200">
+                    <button class="accordion-button w-full text-left p-4 hover:bg-gray-50 transition duration-300 flex justify-between items-center">
+                        <span class="font-bold">Wie schnell reagieren FGL-Aktoren?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 body-text">
+                            <p>Die Reaktionszeit hängt von der Drahtdicke und der Kühlmethode ab. Dünne Drähte (0,1 mm) können in Millisekunden reagieren, während dickere Drähte (1 mm) mehrere Sekunden benötigen. Durch aktive Kühlung (z.B. Luftstrom) lässt sich die Zykluszeit deutlich verkürzen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item border-b border-gray-200">
+                    <button class="accordion-button w-full text-left p-4 hover:bg-gray-50 transition duration-300 flex justify-between items-center">
+                        <span class="font-bold">Kann ich FGL-Aktoren selbst konfektionieren?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 body-text">
+                            <p>Wir empfehlen die Verwendung unserer vorkonfektionierten Aktoren, da die korrekte Vorspannung und Anschlussart entscheidend für die Leistung und Lebensdauer sind. Für Prototypen und Sonderanwendungen bieten wir jedoch auch Rohdraht und Beratung für die Eigenkonfektionierung an.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button w-full text-left p-4 hover:bg-gray-50 transition duration-300 flex justify-between items-center">
+                        <span class="font-bold">Welche elektrischen Anschlüsse sind möglich?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 body-text">
+                            <p>Wir bieten verschiedene Anschlussvarianten an: Crimpverbindungen für einfache Installation, Lötanschlüsse für höchste Zuverlässigkeit, sowie Steckverbinder für modulare Systeme. Die Wahl hängt von Ihren Anforderungen an Strombelastbarkeit, Wartungsfreundlichkeit und Lebensdauer ab.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="mb-12">
+            <h2 class="h1 font-bold mb-6 text-mayr-blue">Kontakt</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Direktkontakt</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Telefon</h4>
+                                <p class="body-text">+49 123 456789</p>
+                                <p class="text-sm text-gray-600">Mo-Fr 8:00-17:00 Uhr</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">E-Mail</h4>
+                                <p class="body-text">info@mayr-technologie.de</p>
+                                <p class="text-sm text-gray-600">Antwort innerhalb von 24h</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-mayr-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Adresse</h4>
+                                <p class="body-text">Musterstraße 123<br>12345 Musterstadt<br>Deutschland</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Kontaktformular</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name*</label>
+                            <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mayr-blue focus:border-transparent" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-Mail*</label>
+                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mayr-blue focus:border-transparent" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Betreff*</label>
+                            <select id="subject" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mayr-blue focus:border-transparent" required>
+                                <option value="">Bitte wählen...</option>
+                                <option value="info">Allgemeine Anfrage</option>
+                                <option value="quote">Angebotsanfrage</option>
+                                <option value="technical">Technische Frage</option>
+                                <option value="support">Support</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Nachricht*</label>
+                            <textarea id="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mayr-blue focus:border-transparent" required></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="flex items-start">
+                                <input type="checkbox" class="mt-1 mr-2" required>
+                                <span class="text-sm text-gray-700">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="#" class="text-mayr-blue hover:underline">Datenschutzerklärung</a> zu.*</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="bg-mayr-blue hover:bg-blue-700 text-white font-medium px-6 py-3 rounded transition duration-300 w-full">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">mayr Technologie</h3>
+                    <p class="body-text mb-4">Innovative Lösungen mit Formgedächtnislegierungen für industrielle Anwendungen.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-xing"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Produkte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Formgedächtnislegierungen</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Powerbündel</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Spannsysteme</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Konfigurator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Technische Dokumente</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Glossar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Rechtliches</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Impressum</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Datenschutz</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">AGB</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Cookie-Einstellungen</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="body-text text-gray-400 mb-4 md:mb-0">© 2023 mayr Technologie. Alle Rechte vorbehalten.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">Deutsch</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Mobile Dropdown Toggle
+        document.querySelectorAll('#mobileMenu .dropdown button').forEach(button => {
+            button.addEventListener('click', function() {
+                const dropdown = this.nextElementSibling;
+                dropdown.classList.toggle('hidden');
+                this.querySelector('i').classList.toggle('fa-chevron-down');
+                this.querySelector('i').classList.toggle('fa-chevron-up');
+            });
+        });
+
+        // Tab Navigation
+        document.querySelectorAll('[data-tab-target]').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const target = document.querySelector(this.dataset.tabTarget);
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Deactivate all tabs
+                document.querySelectorAll('[data-tab-target]').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('border-mayr-blue');
+                    t.classList.remove('text-mayr-blue');
+                    t.classList.add('border-transparent');
+                });
+                
+                // Show selected tab content
+                target.classList.add('active');
+                
+                // Activate selected tab
+                this.classList.add('active', 'border-mayr-blue', 'text-mayr-blue');
+                this.classList.remove('border-transparent');
+            });
+        });
+
+        // Configurator Navigation
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.configurator-step');
+                const nextStep = currentStep.nextElementSibling;
+                
+                currentStep.classList.remove('active');
+                nextStep.classList.add('active');
+                
+                // Update progress bar
+                const progress = document.querySelector('.bg-mayr-blue');
+                const steps = document.querySelectorAll('.configurator-step');
+                const activeStep = document.querySelector('.configurator-step.active');
+                const stepNumber = Array.from(steps).indexOf(activeStep) + 1;
+                progress.style.width = `${(stepNumber / steps.length) * 100}%`;
+                
+                // Update step indicators
+                document.querySelectorAll('.flex.space-x-2 div').forEach((div, index) => {
+                    if (index < stepNumber) {
+                        div.classList.remove('bg-gray-300', 'text-gray-700');
+                        div.classList.add('bg-mayr-blue', 'text-white');
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.configurator-step');
+                const prevStep = currentStep.previousElementSibling;
+                
+                currentStep.classList.remove('active');
+                prevStep.classList.add('active');
+                
+                // Update progress bar
+                const progress = document.querySelector('.bg-mayr-blue');
+                const steps = document.querySelectorAll('.configurator-step');
+                const activeStep = document.querySelector('.configurator-step.active');
+                const stepNumber = Array.from(steps).indexOf(activeStep) + 1;
+                progress.style.width = `${(stepNumber / steps.length) * 100}%`;
+                
+                // Update step indicators
+                document.querySelectorAll('.flex.space-x-2 div').forEach((div, index) => {
+                    if (index >= stepNumber) {
+                        div.classList.add('bg-gray-300', 'text-gray-700');
+                        div.classList.remove('bg-mayr-blue', 'text-white');
+                    }
+                });
+            });
+        });
+
+        // Length Slider
+        const lengthSlider = document.getElementById('lengthSlider');
+        const lengthValue = document.getElementById('lengthValue');
+        
+        lengthSlider.addEventListener('input', function() {
+            lengthValue.textContent = `${this.value} mm`;
+        });
+
+        // Configurator Option Selection
+        document.querySelectorAll('.config-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all options in this group
+                this.parentElement.querySelectorAll('.config-option').forEach(opt => {
+                    opt.classList.remove('bg-mayr-blue', 'text-white');
+                    opt.classList.add('bg-gray-100', 'hover:bg-mayr-blue', 'hover:text-white');
+                });
+                
+                // Add active class to selected option
+                this.classList.add('bg-mayr-blue', 'text-white');
+                this.classList.remove('bg-gray-100', 'hover:bg-mayr-blue', 'hover:text-white');
+            });
+        });
+
+        // Accordion
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Toggle content
+                content.classList.toggle('show');
+                
+                // Toggle icon
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+                
+                // Close other accordion items
+                if (content.classList.contains('show')) {
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content) {
+                            item.classList.remove('show');
+                            item.previousElementSibling.querySelector('i').classList.remove('fa-chevron-up');
+                            item.previousElementSibling.querySelector('i').classList.add('fa-chevron-down');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Cookie Banner
+        setTimeout(() => {
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookieBanner').classList.remove('hidden');
+            }
+        }, 1000);
+
+        document.getElementById('acceptCookies').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.add('hidden');
+        });
+
+        document.getElementById('rejectCookies').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.getElementById('cookieBanner').classList.add('hidden');
+        });
+
+        // Language Selector
+        document.querySelector('.language-selector button').addEventListener('click', function() {
+            const menu = this.nextElementSibling;
+            menu.classList.toggle('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown') && !e.target.closest('.language-selector')) {
+                document.querySelectorAll('.dropdown-menu, .language-menu').forEach(menu => {
+                    menu.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
